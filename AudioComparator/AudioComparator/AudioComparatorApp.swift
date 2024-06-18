@@ -10,9 +10,10 @@ import SwiftData
 
 @main
 struct AudioComparatorApp: App {
+    /*
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            MusicFile.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -22,11 +23,14 @@ struct AudioComparatorApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+     */
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(for: [
+            MusicFile.self
+        ])
     }
 }

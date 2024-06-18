@@ -7,20 +7,21 @@
 
 import SwiftUI
 import SwiftData
+import CryptoKit
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var items: [MusicFile]
+    
+    @State private var importedFile: URL?
+    
+    @State private var error: Error?
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+                ForEach(items) { model in
+                    CellView.from(model: model)
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -29,26 +30,55 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                    FileAudioImporter(url: $importedFile)
                 }
             }
         } detail: {
             Text("Select an item")
         }
+        .onChange(of: importedFile) { _, newValue in
+            guard let newValue else {
+                return
+            }
+            do {
+                try add(url: newValue)
+            } catch {
+                self.error = error
+            }
+        }
+        .onAppear {
+            if ProcessInfo.processInfo.isPreview {
+                loadFileFromBundle()
+            }
+            
+            #if targetEnvironment(simulator)
+                loadFileFromBundle()
+            #endif
+        }
+        .errorAlert(error: $error)
+    }
+    
+    private func loadFileFromBundle() {
+        if let sound = Bundle.main.url(forResource: "town-10169", withExtension: "mp3") {
+            importedFile = sound
+        }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+    private func add(url: URL) throws {
+        try withAnimation {
+            let item = MusicFile(
+                hashFile: try url.calculatedHash(),
+                url: url,
+                title: ""
+            )
+        
+            modelContext.insert(item)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
+            offsets.forEach { index in
                 modelContext.delete(items[index])
             }
         }
@@ -57,5 +87,80 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: MusicFile.self, inMemory: true)
+}
+
+extension ProcessInfo {
+    var isPreview: Bool {
+        environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
+}
+
+
+struct CellView: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    let model: MusicFile
+    
+    @StateObject var audioPlayerViewModel: AudioPlayerViewModel
+    
+    @StateObject var audioMetadata: AudioMetadata
+    
+    @State private var error: Error?
+    
+    var body: some View {
+        HStack(spacing: 20) {
+            
+            Text(audioMetadata.title)
+            
+            Button(action: {
+                do {
+                    try audioPlayerViewModel.playOrPause()
+                } catch {
+                    self.error = error
+                }
+            }) {
+                Image(systemName: audioPlayerViewModel.isPlaying ? "pause.circle" : "play.circle")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+            }
+        }
+        .errorAlert(error: $error)
+        .task {
+            do {
+                try await audioMetadata.load()
+                model.title = audioMetadata.title
+            } catch {
+                self.error = error
+            }
+        }
+    }
+}
+
+extension CellView {
+    static func from(model: MusicFile) -> Self {
+        CellView(
+            model: model,
+            audioPlayerViewModel: AudioPlayerViewModel(url: model.url),
+            audioMetadata: AudioMetadata(url: model.url)
+        )
+    }
+}
+
+extension URL {
+    func calculatedHash() throws -> String {
+        try sha256().map { String(format: "%02hhx", $0) }.joined()
+    }
+    
+    private func sha256() throws -> SHA256.Digest {
+        let handle = try FileHandle(forReadingFrom: self)
+        var hasher = SHA256()
+        while autoreleasepool(invoking: {
+            let nextChunk = handle.readData(ofLength: SHA256.blockByteCount)
+            guard !nextChunk.isEmpty else { return false }
+            hasher.update(data: nextChunk)
+            return true
+        }) { }
+        return hasher.finalize()
+    }
 }
