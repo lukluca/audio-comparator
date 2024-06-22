@@ -65,7 +65,7 @@ struct MusicFileDetail: View {
         .onAppear {
             audioSpectrogram.configuation = .init(requiresMicrophone: false)
         }
-        .onChange(of: audioSpectrogram.error) { error in
+        .onChange(of: audioSpectrogram.error) { (_, error) in
             self.error = error
         }
         .errorAlert(error: $error)
