@@ -21,7 +21,11 @@ struct ContentView: View {
         NavigationSplitView {
             List {
                 ForEach(items) { model in
-                    CellView.from(model: model)
+                    NavigationLink {
+                        MusicFileDetail.from(model: model)
+                    } label: {
+                        CellView.from(model: model)
+                    }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -102,8 +106,6 @@ struct CellView: View {
     @Environment(\.modelContext) private var modelContext
     let model: MusicFile
     
-    @StateObject var audioPlayerViewModel: AudioPlayerViewModel
-    
     @StateObject var audioMetadata: AudioMetadata
     
     @State private var error: Error?
@@ -112,18 +114,6 @@ struct CellView: View {
         HStack(spacing: 20) {
             
             Text(audioMetadata.title)
-            
-            Button(action: {
-                do {
-                    try audioPlayerViewModel.playOrPause()
-                } catch {
-                    self.error = error
-                }
-            }) {
-                Image(systemName: audioPlayerViewModel.isPlaying ? "pause.circle" : "play.circle")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-            }
         }
         .errorAlert(error: $error)
         .task {
@@ -141,13 +131,12 @@ extension CellView {
     static func from(model: MusicFile) -> Self {
         CellView(
             model: model,
-            audioPlayerViewModel: AudioPlayerViewModel(url: model.url),
             audioMetadata: AudioMetadata(url: model.url)
         )
     }
 }
 
-extension URL {
+private extension URL {
     func calculatedHash() throws -> String {
         try sha256().map { String(format: "%02hhx", $0) }.joined()
     }

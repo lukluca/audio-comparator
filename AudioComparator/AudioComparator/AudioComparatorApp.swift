@@ -7,9 +7,11 @@
 
 import SwiftUI
 import SwiftData
+import SpectrogramView
 
 @main
 struct AudioComparatorApp: App {
+    
     /*
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([

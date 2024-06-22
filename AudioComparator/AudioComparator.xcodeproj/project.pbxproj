@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A992F632C2484F70065FA6F /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 4A992F622C2484F70065FA6F /* ComplexModule */; };
+		4A992F692C2488090065FA6F /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A992F682C2488050065FA6F /* View+.swift */; };
 		4AE2F5652C20AD6E00D48883 /* AudioComparatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F5642C20AD6E00D48883 /* AudioComparatorApp.swift */; };
 		4AE2F5672C20AD6E00D48883 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F5662C20AD6E00D48883 /* ContentView.swift */; };
 		4AE2F5692C20AD6E00D48883 /* MusicFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F5682C20AD6E00D48883 /* MusicFile.swift */; };
@@ -14,10 +16,12 @@
 		4AE2F56E2C20AD6F00D48883 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AE2F56D2C20AD6F00D48883 /* Preview Assets.xcassets */; };
 		4AE2F5752C20AE6200D48883 /* FileAudioImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F5742C20AE6200D48883 /* FileAudioImporter.swift */; };
 		4AE2F5772C20B31F00D48883 /* town-10169.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4AE2F5762C20B31F00D48883 /* town-10169.mp3 */; };
-		4AE2F5792C20B49B00D48883 /* AudioPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F5782C20B48D00D48883 /* AudioPlayerViewModel.swift */; };
+		4AF1F8242C2359A700B7B2A7 /* SpectrogramView in Frameworks */ = {isa = PBXBuildFile; productRef = 4AF1F8232C2359A700B7B2A7 /* SpectrogramView */; };
+		4AF1F8282C235D3C00B7B2A7 /* MusicFileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1F8272C235D3C00B7B2A7 /* MusicFileDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A992F682C2488050065FA6F /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		4AE2F5612C20AD6E00D48883 /* AudioComparator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioComparator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE2F5642C20AD6E00D48883 /* AudioComparatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioComparatorApp.swift; sourceTree = "<group>"; };
 		4AE2F5662C20AD6E00D48883 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,14 +30,39 @@
 		4AE2F56D2C20AD6F00D48883 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4AE2F5742C20AE6200D48883 /* FileAudioImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAudioImporter.swift; sourceTree = "<group>"; };
 		4AE2F5762C20B31F00D48883 /* town-10169.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "town-10169.mp3"; sourceTree = "<group>"; };
-		4AE2F5782C20B48D00D48883 /* AudioPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewModel.swift; sourceTree = "<group>"; };
+		4AF1F8272C235D3C00B7B2A7 /* MusicFileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFileDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4A992F652C2487C60065FA6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AudioPlayerViewModel.swift,
+			);
+			target = 4AE2F5602C20AD6E00D48883 /* AudioComparator */;
+		};
+		4A992F672C2487D50065FA6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AudioExtractor.swift,
+				ShazamHashGenerator.swift,
+			);
+			target = 4AE2F5602C20AD6E00D48883 /* AudioComparator */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		4A992F642C2487BC0065FA6F /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4A992F652C2487C60065FA6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
+		4A992F662C2487CD0065FA6F /* Tools */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4A992F672C2487D50065FA6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Tools; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4AE2F55E2C20AD6E00D48883 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AF1F8242C2359A700B7B2A7 /* SpectrogramView in Frameworks */,
+				4A992F632C2484F70065FA6F /* ComplexModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,13 +88,16 @@
 		4AE2F5632C20AD6E00D48883 /* AudioComparator */ = {
 			isa = PBXGroup;
 			children = (
-				4AE2F5782C20B48D00D48883 /* AudioPlayerViewModel.swift */,
+				4A992F682C2488050065FA6F /* View+.swift */,
+				4A992F662C2487CD0065FA6F /* Tools */,
+				4A992F642C2487BC0065FA6F /* ViewModels */,
 				4AE2F5642C20AD6E00D48883 /* AudioComparatorApp.swift */,
 				4AE2F5662C20AD6E00D48883 /* ContentView.swift */,
 				4AE2F5682C20AD6E00D48883 /* MusicFile.swift */,
 				4AE2F56A2C20AD6F00D48883 /* Assets.xcassets */,
 				4AE2F56C2C20AD6F00D48883 /* Preview Content */,
 				4AE2F5742C20AE6200D48883 /* FileAudioImporter.swift */,
+				4AF1F8272C235D3C00B7B2A7 /* MusicFileDetail.swift */,
 			);
 			path = AudioComparator;
 			sourceTree = "<group>";
@@ -95,6 +127,10 @@
 			dependencies = (
 			);
 			name = AudioComparator;
+			packageProductDependencies = (
+				4AF1F8232C2359A700B7B2A7 /* SpectrogramView */,
+				4A992F622C2484F70065FA6F /* ComplexModule */,
+			);
 			productName = AudioComparator;
 			productReference = 4AE2F5612C20AD6E00D48883 /* AudioComparator.app */;
 			productType = "com.apple.product-type.application";
@@ -123,6 +159,10 @@
 				Base,
 			);
 			mainGroup = 4AE2F5582C20AD6E00D48883;
+			packageReferences = (
+				4AF1F8222C2359A700B7B2A7 /* XCRemoteSwiftPackageReference "SpectrogramView" */,
+				4A992F612C2484F70065FA6F /* XCRemoteSwiftPackageReference "swift-numerics" */,
+			);
 			productRefGroup = 4AE2F5622C20AD6E00D48883 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -151,9 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE2F5672C20AD6E00D48883 /* ContentView.swift in Sources */,
+				4AF1F8282C235D3C00B7B2A7 /* MusicFileDetail.swift in Sources */,
 				4AE2F5692C20AD6E00D48883 /* MusicFile.swift in Sources */,
+				4A992F692C2488090065FA6F /* View+.swift in Sources */,
 				4AE2F5752C20AE6200D48883 /* FileAudioImporter.swift in Sources */,
-				4AE2F5792C20B49B00D48883 /* AudioPlayerViewModel.swift in Sources */,
 				4AE2F5652C20AD6E00D48883 /* AudioComparatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +332,7 @@
 				DEVELOPMENT_TEAM = G58Y4PZ34Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -320,6 +362,7 @@
 				DEVELOPMENT_TEAM = G58Y4PZ34Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -360,6 +403,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4A992F612C2484F70065FA6F /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-numerics.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+		4AF1F8222C2359A700B7B2A7 /* XCRemoteSwiftPackageReference "SpectrogramView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lukluca/SpectrogramView";
+			requirement = {
+				branch = "swift-ui";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4A992F622C2484F70065FA6F /* ComplexModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A992F612C2484F70065FA6F /* XCRemoteSwiftPackageReference "swift-numerics" */;
+			productName = ComplexModule;
+		};
+		4AF1F8232C2359A700B7B2A7 /* SpectrogramView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AF1F8222C2359A700B7B2A7 /* XCRemoteSwiftPackageReference "SpectrogramView" */;
+			productName = SpectrogramView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4AE2F5592C20AD6E00D48883 /* Project object */;
 }

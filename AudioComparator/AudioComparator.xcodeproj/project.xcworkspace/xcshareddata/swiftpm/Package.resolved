@@ -1,0 +1,24 @@
+{
+  "originHash" : "503d9df0038fc9985965ffa4a9b4f4d53189f37455a205593190ecff4c10c4f7",
+  "pins" : [
+    {
+      "identity" : "spectrogramview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lukluca/SpectrogramView",
+      "state" : {
+        "branch" : "swift-ui",
+        "revision" : "eb2f85ea2d7e7c6e19ea0afd40c18bce685563ec"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics.git",
+      "state" : {
+        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}
